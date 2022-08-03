@@ -1,11 +1,21 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
+import Like from './src/assets/icon/like.svg';
 
 const App = () => {
   return (
-    <View>
-      <Text>App</Text>
+    <View style={styles.container}>
+      <Like width={40} height={40} />
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
+
 export default App;
