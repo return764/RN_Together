@@ -1,12 +1,13 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
-import Like from './src/assets/icon/like.svg';
+import {StyleSheet} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import Navigators from './navigator';
 
 const App = () => {
   return (
-    <View style={styles.container}>
-      <Like width={40} height={40} />
-    </View>
+    <NavigationContainer>
+      <Navigators />
+    </NavigationContainer>
   );
 };
 
