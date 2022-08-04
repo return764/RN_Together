@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import DashboardIcon from '../assets/icon/dashboard.svg';
 import HomeScreen from '../pages/HomeScreen';
@@ -12,6 +12,9 @@ import {Text} from 'react-native';
 
 const Tab = createBottomTabNavigator();
 const iconSize = 25;
+
+// #2775AB 景泰蓝
+// #EFBACE 粉米
 
 const tabScreens = [
   {
@@ -52,15 +55,23 @@ const tabScreens = [
   },
 ];
 
+const tabBaseOptions = {};
+
 const MyNavigator = () => {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+      screenOptions={{
+        headerTintColor: '#4994CA',
+        headerStyle: {
+          backgroundColor: '#EFBACE',
+        },
+      }}>
       {tabScreens.map(({name, component, options}) => (
         <Tab.Screen
           navigationKey={name}
           name={name}
           component={component}
-          options={options}
+          options={{...options, ...tabBaseOptions}}
         />
       ))}
     </Tab.Navigator>
