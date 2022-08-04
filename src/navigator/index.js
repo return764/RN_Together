@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import DashboardIcon from '../assets/icon/dashboard.svg';
 import HomeScreen from '../pages/HomeScreen';
@@ -68,6 +68,7 @@ const MyNavigator = () => {
       }}>
       {tabScreens.map(({name, component, options}) => (
         <Tab.Screen
+          key={name}
           navigationKey={name}
           name={name}
           component={component}

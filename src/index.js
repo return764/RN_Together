@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import Navigators from './navigator';
+import {gestureHandlerRootHOC} from 'react-native-gesture-handler';
 
 const App = () => {
   return (
@@ -19,4 +20,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default gestureHandlerRootHOC(App);
