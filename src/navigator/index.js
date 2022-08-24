@@ -9,12 +9,33 @@ import ShopScreen from '../pages/ShopScreen';
 import ToosIcon from '../assets/icon/toos.svg';
 import SettingScreen from '../pages/SettingScreen';
 import {Text} from 'react-native';
+import SignInScreen from '../pages/SignInScreen';
+import SignUpScreen from '../pages/SignUpScreen';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
+const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 const iconSize = 25;
 
 // #2775AB 景泰蓝
 // #EFBACE 粉米
+
+const signScreens = [
+  {
+    name: 'SignIn',
+    component: SignInScreen,
+    options: {
+      title: '登录',
+    },
+  },
+  {
+    name: 'SignUp',
+    component: SignUpScreen,
+    options: {
+      title: '注册',
+    },
+  },
+];
 
 const tabScreens = [
   {
@@ -56,16 +77,17 @@ const tabScreens = [
 ];
 
 const tabBaseOptions = {};
+const screenOptions = {
+  headerTintColor: '#4994CA',
+  headerStyle: {
+    backgroundColor: '#EFBACE',
+  },
+};
 
 const MyNavigator = () => {
-  return (
-    <Tab.Navigator
-      screenOptions={{
-        headerTintColor: '#4994CA',
-        headerStyle: {
-          backgroundColor: '#EFBACE',
-        },
-      }}>
+  const isSignIn = false;
+  return isSignIn ? (
+    <Tab.Navigator screenOptions={screenOptions}>
       {tabScreens.map(({name, component, options}) => (
         <Tab.Screen
           key={name}
@@ -76,6 +98,18 @@ const MyNavigator = () => {
         />
       ))}
     </Tab.Navigator>
+  ) : (
+    <Stack.Navigator screenOptions={screenOptions}>
+      {signScreens.map(({name, component, options}) => (
+        <Stack.Screen
+          key={name}
+          name={name}
+          component={component}
+          navigationKey={name}
+          options={options}
+        />
+      ))}
+    </Stack.Navigator>
   );
 };
 
