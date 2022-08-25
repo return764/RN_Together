@@ -99,7 +99,7 @@ const MyNavigator = () => {
       ))}
     </Tab.Navigator>
   ) : (
-    <Stack.Navigator screenOptions={screenOptions}>
+    <Stack.Navigator screenOptions={screenOptions} initialRouteName="SignIn">
       {signScreens.map(({name, component, options}) => (
         <Stack.Screen
           key={name}
