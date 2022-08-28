@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext, useState} from 'react';
 import {
   Button,
   StyleSheet,
@@ -9,18 +9,50 @@ import {
 } from 'react-native';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import {useNavigation} from '@react-navigation/native';
+import {login} from '../api/user';
+import StoreContext from '../store/StoreContext';
 
 const SignInScreen = () => {
   const navigation = useNavigation();
+  const {setLoginUser} = useContext(StoreContext);
+  const [loginForm, setLoginForm] = useState({
+    username: '',
+    password: '',
+  });
+
   const goToRegister = () => {
     navigation.navigate('SignUp');
+  };
+
+  const setUsername = username => {
+    setLoginForm({...loginForm, username});
+  };
+
+  const setPassword = password => {
+    setLoginForm({...loginForm, password});
+  };
+
+  const handleLogin = async () => {
+    const loginUser = await login(loginForm);
+    // 保存登录用户
+    if (loginUser) {
+      setLoginUser(loginUser);
+    }
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.inputContainer}>
-        <TextInput style={styles.inputEl} placeholder="请输入用户名" />
-        <TextInput style={styles.inputEl} placeholder="请输入密码" />
+        <TextInput
+          style={styles.inputEl}
+          onChangeText={text => setUsername(text)}
+          placeholder="请输入用户名"
+        />
+        <TextInput
+          style={styles.inputEl}
+          onChangeText={text => setPassword(text)}
+          placeholder="请输入密码"
+        />
         <View style={styles.inputActions}>
           <TouchableOpacity style={styles.inputAction}>
             <BouncyCheckbox
@@ -37,7 +69,7 @@ const SignInScreen = () => {
         </View>
       </View>
       <View>
-        <Button title="登录" />
+        <Button onPress={handleLogin} title="登录" />
       </View>
     </View>
   );

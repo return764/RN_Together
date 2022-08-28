@@ -1,14 +1,21 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
 import Navigators from './navigator';
+import {StyleSheet} from 'react-native';
+import Toast from 'react-native-toast-message';
+import {NavigationContainer} from '@react-navigation/native';
 import {gestureHandlerRootHOC} from 'react-native-gesture-handler';
+import {StoreContextProvider} from './store/StoreContext';
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <Navigators />
-    </NavigationContainer>
+    <>
+      <StoreContextProvider>
+        <NavigationContainer>
+          <Navigators />
+        </NavigationContainer>
+      </StoreContextProvider>
+      <Toast />
+    </>
   );
 };
 
