@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext} from 'react';
 import {
   Button,
   StyleSheet,
@@ -11,11 +11,14 @@ import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import {useNavigation} from '@react-navigation/native';
 import {login} from '../api/user';
 import StoreContext from '../store/StoreContext';
+import {useForm} from '../hooks/UseForm';
+import Toast from 'react-native-toast-message';
 
 const SignInScreen = () => {
   const navigation = useNavigation();
   const {setLoginUser} = useContext(StoreContext);
-  const [loginForm, setLoginForm] = useState({
+
+  const [loginForm, , {setUsername, setPassword}] = useForm({
     username: '',
     password: '',
   });
@@ -24,19 +27,15 @@ const SignInScreen = () => {
     navigation.navigate('SignUp');
   };
 
-  const setUsername = username => {
-    setLoginForm({...loginForm, username});
-  };
-
-  const setPassword = password => {
-    setLoginForm({...loginForm, password});
-  };
-
   const handleLogin = async () => {
     const loginUser = await login(loginForm);
     // 保存登录用户
     if (loginUser) {
+      Toast.show({
+        text1: '登录成功!',
+      });
       setLoginUser(loginUser);
+      // 导航至主页
     }
   };
 

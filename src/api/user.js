@@ -9,4 +9,13 @@ const login = async user => {
   }
 };
 
-export {login};
+const register = async createUser => {
+  try {
+    const result = await request.post('/users', createUser);
+    return result.data;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export {login, register};
