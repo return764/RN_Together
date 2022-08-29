@@ -6,7 +6,7 @@ import {register} from '../api/user';
 import StoreContext from '../store/StoreContext';
 
 const SignUpScreen = () => {
-  const {setLoginUser} = useContext(StoreContext);
+  const {dispatch} = useContext(StoreContext);
   const [form, , {setUsername, setNickname, setPassword, setPasswordRepeat}] =
     useForm({
       username: '',
@@ -37,7 +37,7 @@ const SignUpScreen = () => {
         Toast.show({
           text1: '登录成功!',
         });
-        setLoginUser(user);
+        dispatch({type: 'LOGIN', payload: {user}});
         // 导航至主页
       }
     }

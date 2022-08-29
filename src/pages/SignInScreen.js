@@ -16,7 +16,7 @@ import Toast from 'react-native-toast-message';
 
 const SignInScreen = () => {
   const navigation = useNavigation();
-  const {setLoginUser} = useContext(StoreContext);
+  const {dispatch} = useContext(StoreContext);
 
   const [loginForm, , {setUsername, setPassword}] = useForm({
     username: '',
@@ -34,7 +34,7 @@ const SignInScreen = () => {
       Toast.show({
         text1: '登录成功!',
       });
-      setLoginUser(loginUser);
+      dispatch({type: 'LOGIN', payload: {loginUser}});
       // 导航至主页
     }
   };

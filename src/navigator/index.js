@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import DashboardIcon from '../assets/icon/dashboard.svg';
 import HomeScreen from '../pages/HomeScreen';
@@ -12,6 +12,7 @@ import {Text} from 'react-native';
 import SignInScreen from '../pages/SignInScreen';
 import SignUpScreen from '../pages/SignUpScreen';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import StoreContext from '../store/StoreContext';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -85,7 +86,10 @@ const screenOptions = {
 };
 
 const MyNavigator = () => {
-  const isSignIn = false;
+  const {
+    state: {isSignIn},
+  } = useContext(StoreContext);
+
   return isSignIn ? (
     <Tab.Navigator screenOptions={screenOptions}>
       {tabScreens.map(({name, component, options}) => (
