@@ -34,7 +34,7 @@ const SignInScreen = () => {
       Toast.show({
         text1: '登录成功!',
       });
-      dispatch({type: 'LOGIN', payload: {loginUser}});
+      dispatch({type: 'LOGIN', payload: loginUser});
       // 导航至主页
     }
   };

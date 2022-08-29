@@ -1,19 +1,23 @@
-import React, {createContext, useReducer, useState} from 'react';
+import React, {createContext, useReducer} from 'react';
+import {load, save} from '../utils/store';
 
 const StoreContext = createContext({});
 
-const reducer = (state, action) => {
+const reducer = async (state, action) => {
   switch (action.type) {
     case 'LOGIN':
-      return {...state, isSignIn: true, ...action.payload};
+      await save('@user', action.payload);
+      return {...state, isSignIn: true, loginUser: action.payload};
     default:
       throw new Error();
   }
 };
 
+const currentUser = load('@user');
+
 const initialState = {
-  loginUser: null,
-  isSignIn: false,
+  loginUser: currentUser,
+  isSignIn: !!currentUser,
 };
 
 export const StoreContextProvider = ({children}) => {
