@@ -1,27 +1,40 @@
-import React, {createContext, useReducer} from 'react';
-import {load, save} from '../utils/store';
+import React, {createContext, useEffect, useReducer} from 'react';
+import {load} from '../utils/store';
 
 const StoreContext = createContext({});
 
-const reducer = async (state, action) => {
-  switch (action.type) {
+const reducer = (state, {type, payload}) => {
+  switch (type) {
     case 'LOGIN':
-      await save('@user', action.payload);
-      return {...state, isSignIn: true, loginUser: action.payload};
+      return {...state, isSignIn: true, loginUser: payload};
+    case 'REFRESH_USER':
+      return {
+        ...state,
+        isSignIn: !!payload,
+        loginUser: payload,
+        isLoading: false,
+      };
     default:
       throw new Error();
   }
 };
 
-const currentUser = load('@user');
-
 const initialState = {
-  loginUser: currentUser,
-  isSignIn: !!currentUser,
+  loginUser: null,
+  isSignIn: false,
+  isLoading: true,
 };
 
 export const StoreContextProvider = ({children}) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  useEffect(() => {
+    (async () => {
+      const user = await load('@user');
+      dispatch({type: 'REFRESH_USER', payload: user});
+    })();
+  }, []);
+
   return (
     <StoreContext.Provider value={{state, dispatch}}>
       {children}

@@ -1,10 +1,15 @@
 import React from 'react';
 import Navigators from './navigator';
-import {StyleSheet} from 'react-native';
+import {DevSettings, StyleSheet} from 'react-native';
 import Toast from 'react-native-toast-message';
 import {NavigationContainer} from '@react-navigation/native';
 import {gestureHandlerRootHOC} from 'react-native-gesture-handler';
 import {StoreContextProvider} from './store/StoreContext';
+import {clearStore} from './utils/store';
+
+DevSettings.addMenuItem('清除AsyncStore', async () => {
+  await clearStore();
+});
 
 const App = () => {
   return (

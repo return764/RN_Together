@@ -1,10 +1,17 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {Button, Text, View} from 'react-native';
+import {clearStore} from '../utils/store';
 
 const HomeScreen = () => {
   return (
     <View>
       <Text>HomeScreen</Text>
+      <Button
+        title="清理"
+        onPress={async () => {
+          await clearStore();
+        }}
+      />
     </View>
   );
 };

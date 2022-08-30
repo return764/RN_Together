@@ -13,14 +13,15 @@ import {login} from '../api/user';
 import StoreContext from '../store/StoreContext';
 import {useForm} from '../hooks/UseForm';
 import Toast from 'react-native-toast-message';
+import {save} from '../utils/store';
 
 const SignInScreen = () => {
   const navigation = useNavigation();
   const {dispatch} = useContext(StoreContext);
 
   const [loginForm, , {setUsername, setPassword}] = useForm({
-    username: '',
-    password: '',
+    username: 'root11',
+    password: '123456789',
   });
 
   const goToRegister = () => {
@@ -34,6 +35,7 @@ const SignInScreen = () => {
       Toast.show({
         text1: '登录成功!',
       });
+      await save('@user', loginUser);
       dispatch({type: 'LOGIN', payload: loginUser});
       // 导航至主页
     }

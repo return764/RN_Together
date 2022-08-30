@@ -16,6 +16,13 @@ request.interceptors.response.use(
         text1: response.data.message,
       });
     }
+
+    if (response && response.status === 403) {
+      Toast.show({
+        type: 'error',
+        text1: '权限异常',
+      });
+    }
     return Promise.reject(error);
   },
 );

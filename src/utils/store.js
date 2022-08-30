@@ -16,4 +16,12 @@ const load = async key => {
   }
 };
 
-export {save, load};
+const clearStore = async () => {
+  try {
+    await AsyncStorage.clear();
+  } catch (e) {
+    console.error('clear AS:', e);
+  }
+};
+
+export {save, load, clearStore};

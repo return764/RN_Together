@@ -1,119 +1,32 @@
 import React, {useContext} from 'react';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import DashboardIcon from '../assets/icon/dashboard.svg';
-import HomeScreen from '../pages/HomeScreen';
-import TaskIcon from '../assets/icon/task.svg';
-import TaskScreen from '../pages/TaskScreen';
-import RockIcon from '../assets/icon/rock.svg';
-import ShopScreen from '../pages/ShopScreen';
-import ToosIcon from '../assets/icon/toos.svg';
-import SettingScreen from '../pages/SettingScreen';
-import {Text} from 'react-native';
-import SignInScreen from '../pages/SignInScreen';
-import SignUpScreen from '../pages/SignUpScreen';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import StoreContext from '../store/StoreContext';
+import HomeBaseTabStack from './HomeBaseTabStack';
+import SignStack from './SignStack';
+import SplashScreen from '../pages/SplashScreen';
 
-const Stack = createNativeStackNavigator();
-const Tab = createBottomTabNavigator();
-const iconSize = 25;
+const TopStack = createNativeStackNavigator();
 
 // #2775AB 景泰蓝
 // #EFBACE 粉米
 
-const signScreens = [
-  {
-    name: 'SignIn',
-    component: SignInScreen,
-    options: {
-      title: '登录',
-    },
-  },
-  {
-    name: 'SignUp',
-    component: SignUpScreen,
-    options: {
-      title: '注册',
-    },
-  },
-];
-
-const tabScreens = [
-  {
-    name: 'Home',
-    component: HomeScreen,
-    options: {
-      title: '主页',
-      tabBarLabel: () => <Text>主页</Text>,
-      tabBarIcon: () => <DashboardIcon height={iconSize} width={iconSize} />,
-    },
-  },
-  {
-    name: 'Task',
-    component: TaskScreen,
-    options: {
-      title: '任务',
-      tabBarLabel: () => <Text>任务</Text>,
-      tabBarIcon: () => <TaskIcon height={iconSize} width={iconSize} />,
-    },
-  },
-  {
-    name: 'Shop',
-    component: ShopScreen,
-    options: {
-      title: '商店',
-      tabBarLabel: () => <Text>商店</Text>,
-      tabBarIcon: () => <RockIcon height={iconSize} width={iconSize} />,
-    },
-  },
-  {
-    name: 'Setting',
-    component: SettingScreen,
-    options: {
-      title: '设置',
-      tabBarLabel: () => <Text>设置</Text>,
-      tabBarIcon: () => <ToosIcon height={iconSize} width={iconSize} />,
-    },
-  },
-];
-
-const tabBaseOptions = {};
-const screenOptions = {
-  headerTintColor: '#4994CA',
-  headerStyle: {
-    backgroundColor: '#EFBACE',
-  },
-};
-
 const MyNavigator = () => {
   const {
-    state: {isSignIn},
+    state: {isSignIn, isLoading},
   } = useContext(StoreContext);
 
-  return isSignIn ? (
-    <Tab.Navigator screenOptions={screenOptions}>
-      {tabScreens.map(({name, component, options}) => (
-        <Tab.Screen
-          key={name}
-          navigationKey={name}
-          name={name}
-          component={component}
-          options={{...options, ...tabBaseOptions}}
-        />
-      ))}
-    </Tab.Navigator>
-  ) : (
-    <Stack.Navigator screenOptions={screenOptions} initialRouteName="SignIn">
-      {signScreens.map(({name, component, options}) => (
-        <Stack.Screen
-          key={name}
-          name={name}
-          component={component}
-          navigationKey={name}
-          options={options}
-        />
-      ))}
-    </Stack.Navigator>
+  if (isLoading) {
+    return <SplashScreen />;
+  }
+
+  return (
+    <TopStack.Navigator screenOptions={{headerShown: false}}>
+      {isSignIn ? (
+        <TopStack.Screen name="A" component={HomeBaseTabStack} />
+      ) : (
+        <TopStack.Screen name="B" component={SignStack} />
+      )}
+    </TopStack.Navigator>
   );
 };
 
