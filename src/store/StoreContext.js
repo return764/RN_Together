@@ -6,12 +6,20 @@ const StoreContext = createContext({});
 const reducer = (state, {type, payload}) => {
   switch (type) {
     case 'LOGIN':
-      return {...state, isSignIn: true, loginUser: payload};
-    case 'REFRESH_USER':
       return {
         ...state,
-        isSignIn: !!payload,
+        isSignIn: true,
+        isBinding: !!payload.binding,
         loginUser: payload,
+      };
+    case 'REFRESH_USER':
+      const isSignIn = !!payload;
+
+      return {
+        ...state,
+        isSignIn,
+        loginUser: payload,
+        isBinding: isSignIn && !!payload.binding,
         isLoading: false,
       };
     default:
@@ -22,6 +30,7 @@ const reducer = (state, {type, payload}) => {
 const initialState = {
   loginUser: null,
   isSignIn: false,
+  isBinding: false,
   isLoading: true,
 };
 

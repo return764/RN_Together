@@ -1,8 +1,12 @@
 import axios from 'axios';
 import Toast from 'react-native-toast-message';
+import {Platform} from 'react-native';
 
 const request = axios.create({
-  baseURL: 'http://10.0.2.2:7090',
+  baseURL:
+    Platform.OS === 'android'
+      ? 'http://10.0.2.2:7090'
+      : 'http://localhost:7090',
   timeout: 1000,
 });
 
