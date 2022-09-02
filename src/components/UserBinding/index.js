@@ -1,25 +1,25 @@
-import {Button, StyleSheet, Text, TextInput, View} from 'react-native';
-import React from 'react';
+import {StyleSheet, Text, TextInput} from 'react-native';
+import React, {useContext} from 'react';
+import CardView from '../common/CardView/CardView';
+import Button from '../common/Button';
+import StoreContext from '../../store/StoreContext';
 
-export default function UserBinding({currentUser}) {
+const UserBinding = ({currentUser}) => {
+  const {dispatch} = useContext(StoreContext);
+
   return (
-    <View style={styles.cardWrap}>
+    <CardView>
       <TextInput
         style={styles.inputEl}
         placeholder="输入绑定用户的识别码(区别大小写)"
       />
       <Text style={styles.textEl}>您的识别码: {currentUser.identifyCode}</Text>
-      <Button title="绑定" />
-    </View>
+      <Button title="绑定" onPress={() => dispatch({type: 'BINDING'})} />
+    </CardView>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  cardWrap: {
-    padding: 15,
-    borderRadius: 5,
-    backgroundColor: '#dee',
-  },
   inputEl: {
     height: 45,
     borderRadius: 5,
@@ -31,3 +31,5 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
 });
+
+export default UserBinding;

@@ -22,6 +22,11 @@ const reducer = (state, {type, payload}) => {
         isBinding: isSignIn && !!payload.binding,
         isLoading: false,
       };
+    case 'BINDING':
+      return {
+        ...state,
+        isBinding: true,
+      };
     default:
       throw new Error();
   }
