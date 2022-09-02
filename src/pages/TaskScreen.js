@@ -1,5 +1,6 @@
 import React from 'react';
 import {Text, View} from 'react-native';
+import {withScreenTransition} from '../components/hoc';
 
 const TaskScreen = () => {
   return (
@@ -9,4 +10,4 @@ const TaskScreen = () => {
   );
 };
 
-export default TaskScreen;
+export default withScreenTransition(TaskScreen);

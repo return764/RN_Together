@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import HomeScreen from '../pages/HomeScreen';
-import {Text} from 'react-native';
+import {Text, Animated, View} from 'react-native';
 import DashboardIcon from '../assets/icon/dashboard.svg';
 import TaskScreen from '../pages/TaskScreen';
 import TaskIcon from '../assets/icon/task.svg';
@@ -9,6 +9,7 @@ import RockIcon from '../assets/icon/rock.svg';
 import SettingScreen from '../pages/SettingScreen';
 import ToosIcon from '../assets/icon/toos.svg';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {colors} from '../utils/setting';
 
 const Tab = createBottomTabNavigator();
 const iconSize = 25;
@@ -54,9 +55,9 @@ const tabScreens = [
 
 const tabBaseOptions = {};
 const screenOptions = {
-  headerTintColor: '#4994CA',
+  headerTintColor: colors.secondary,
   headerStyle: {
-    backgroundColor: '#EFBACE',
+    backgroundColor: colors.primary,
   },
 };
 

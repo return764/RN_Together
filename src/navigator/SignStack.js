@@ -2,6 +2,7 @@ import React from 'react';
 import SignInScreen from '../pages/SignInScreen';
 import SignUpScreen from '../pages/SignUpScreen';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {colors} from '../utils/setting';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,9 +24,9 @@ const signScreens = [
 ];
 
 const screenOptions = {
-  headerTintColor: '#4994CA',
+  headerTintColor: colors.secondary,
   headerStyle: {
-    backgroundColor: '#EFBACE',
+    backgroundColor: colors.primary,
   },
 };
 

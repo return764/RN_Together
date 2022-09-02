@@ -4,6 +4,7 @@ import StoreContext from '../store/StoreContext';
 import UserBinding from '../components/UserBinding/index';
 import {load} from '../utils/store';
 import CardView from '../components/common/CardView/CardView';
+import {withScreenTransition} from '../components/hoc';
 
 const HomeScreen = () => {
   const {
@@ -56,4 +57,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeScreen;
+export default withScreenTransition(HomeScreen);

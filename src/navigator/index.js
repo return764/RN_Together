@@ -7,9 +7,6 @@ import SplashScreen from '../pages/SplashScreen';
 
 const TopStack = createNativeStackNavigator();
 
-// #2775AB 景泰蓝
-// #EFBACE 粉米
-
 const MyNavigator = () => {
   const {
     state: {isSignIn, isLoading},

@@ -1,5 +1,6 @@
 import React from 'react';
 import {Text, View} from 'react-native';
+import {withScreenTransition} from '../components/hoc';
 
 const SettingScreen = () => {
   return (
@@ -9,4 +10,4 @@ const SettingScreen = () => {
   );
 };
 
-export default SettingScreen;
+export default withScreenTransition(SettingScreen);

@@ -3,6 +3,8 @@ import React, {useContext} from 'react';
 import CardView from '../common/CardView/CardView';
 import Button from '../common/Button';
 import StoreContext from '../../store/StoreContext';
+import {material} from 'react-native-typography';
+import {colors} from '../../utils/setting';
 
 const UserBinding = ({currentUser}) => {
   const {dispatch} = useContext(StoreContext);
@@ -13,7 +15,12 @@ const UserBinding = ({currentUser}) => {
         style={styles.inputEl}
         placeholder="输入绑定用户的识别码(区别大小写)"
       />
-      <Text style={styles.textEl}>您的识别码: {currentUser.identifyCode}</Text>
+      <Text style={styles.textEl}>
+        您的识别码:
+        <Text style={{...material.headline, color: colors.tertiary}}>
+          {currentUser.identifyCode}
+        </Text>
+      </Text>
       <Button title="绑定" onPress={() => dispatch({type: 'BINDING'})} />
     </CardView>
   );
