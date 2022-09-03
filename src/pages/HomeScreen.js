@@ -1,10 +1,10 @@
 import React, {useContext} from 'react';
-import {RefreshControl, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {RefreshControl, ScrollView, StyleSheet} from 'react-native';
 import StoreContext from '../store/StoreContext';
 import UserBinding from '../components/UserBinding/index';
-import CardView from '../components/common/CardView/CardView';
 import {withScreenTransition} from '../components/hoc';
 import {refreshUser} from '../api/user';
+import PointStatistic from '../components/PointStatistic';
 
 const HomeScreen = () => {
   const {
@@ -33,18 +33,7 @@ const HomeScreen = () => {
       {!isBinding ? (
         <UserBinding />
       ) : (
-        <CardView>
-          <View>
-            <View>
-              <Text>您的积分：{loginUser.point}</Text>
-            </View>
-            <View>
-              <Text>
-                {loginUser.binding.nickname}的积分：{loginUser.binding.point}
-              </Text>
-            </View>
-          </View>
-        </CardView>
+        <PointStatistic currentUser={loginUser} bindUser={loginUser.binding} />
       )}
     </ScrollView>
   );
