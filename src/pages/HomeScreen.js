@@ -2,9 +2,9 @@ import React, {useContext} from 'react';
 import {RefreshControl, ScrollView, StyleSheet, Text, View} from 'react-native';
 import StoreContext from '../store/StoreContext';
 import UserBinding from '../components/UserBinding/index';
-import {load} from '../utils/store';
 import CardView from '../components/common/CardView/CardView';
 import {withScreenTransition} from '../components/hoc';
+import {refreshUser} from '../api/user';
 
 const HomeScreen = () => {
   const {
@@ -18,7 +18,7 @@ const HomeScreen = () => {
     setRefreshing(true);
 
     // 加载数据
-    const data = await load('@user');
+    const data = await refreshUser();
     dispatch({type: 'REFRESH_USER', payload: data});
     setRefreshing(false);
   }, [dispatch]);
@@ -31,15 +31,17 @@ const HomeScreen = () => {
       }
       style={styles.container}>
       {!isBinding ? (
-        <UserBinding currentUser={loginUser} />
+        <UserBinding />
       ) : (
         <CardView>
           <View>
             <View>
-              <Text>xxx的积分：1</Text>
+              <Text>您的积分：{loginUser.point}</Text>
             </View>
             <View>
-              <Text>xxx的积分：22</Text>
+              <Text>
+                {loginUser.binding.nickname}的积分：{loginUser.binding.point}
+              </Text>
             </View>
           </View>
         </CardView>

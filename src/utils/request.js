@@ -9,13 +9,14 @@ const request = axios.create({
     Platform.OS === 'android'
       ? 'http://192.168.2.12:7090'
       : 'http://localhost:7090',
-  timeout: 1000,
+  timeout: 10000,
 });
 
 request.interceptors.response.use(
   response => response,
   error => {
     const {response} = error;
+    console.log(response);
     if (response && (response.status === 400 || response.status === 500)) {
       Toast.show({
         type: 'error',
