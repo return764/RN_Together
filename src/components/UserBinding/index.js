@@ -1,6 +1,6 @@
 import {StyleSheet, Text, TextInput} from 'react-native';
 import React, {useContext, useState} from 'react';
-import CardView from '../common/CardView/CardView';
+import CardView from '../common/CardView';
 import Button from '../common/Button';
 import StoreContext from '../../store/StoreContext';
 import {material} from 'react-native-typography';

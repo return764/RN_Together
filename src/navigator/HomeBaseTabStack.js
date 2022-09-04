@@ -63,7 +63,7 @@ const screenOptions = {
 
 const HomeBaseTabStack = () => {
   return (
-    <Tab.Navigator screenOptions={screenOptions}>
+    <Tab.Navigator screenOptions={screenOptions} initialRouteName="Task">
       {tabScreens.map(({name, component, options}) => (
         <Tab.Screen
           key={name}

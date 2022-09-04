@@ -1,4 +1,4 @@
-import CardView from '../common/CardView/CardView';
+import CardView from '../common/CardView';
 import {Text, View} from 'react-native';
 import React from 'react';
 

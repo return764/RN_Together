@@ -1,7 +1,7 @@
 import React, {useCallback, useContext, useEffect, useState} from 'react';
 import {SectionList, StyleSheet, Text} from 'react-native';
 import {withScreenTransition} from '../components/hoc';
-import CardView from '../components/common/CardView/CardView';
+import CardView from '../components/common/CardView';
 import StoreContext from '../store/StoreContext';
 import {fetchTasks} from '../api/task';
 import moment from 'moment';
@@ -75,7 +75,7 @@ const TaskScreen = () => {
       onRefresh={handleRefresh}
       sections={data}
       renderItem={({item}) => (
-        <CardView>
+        <CardView style={styles.card}>
           <Text>{item.name}</Text>
           <Text>{item.point}积分</Text>
           <Text>
@@ -92,6 +92,9 @@ const TaskScreen = () => {
 const styles = StyleSheet.create({
   container: {
     padding: 10,
+  },
+  card: {
+    marginVertical: 5,
   },
 });
 

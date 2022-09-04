@@ -2,9 +2,9 @@ import {StyleSheet, View} from 'react-native';
 import React from 'react';
 import Animated, {SlideInDown, SlideOutRight} from 'react-native-reanimated';
 
-const CardView = ({children}) => {
+const CardView = ({children, ...props}) => {
   return (
-    <Animated.View exiting={SlideOutRight} entering={SlideInDown}>
+    <Animated.View {...props} entering={SlideInDown} exiting={SlideOutRight}>
       <View style={[styles.cardWrap]}>{children}</View>
     </Animated.View>
   );

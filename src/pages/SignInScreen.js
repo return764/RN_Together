@@ -1,6 +1,7 @@
 import React, {useContext} from 'react';
 import {
   Button,
+  Platform,
   StyleSheet,
   Text,
   TextInput,
@@ -20,7 +21,7 @@ const SignInScreen = () => {
   const {dispatch} = useContext(StoreContext);
 
   const [loginForm, , {setUsername, setPassword}] = useForm({
-    username: 'root11',
+    username: Platform.OS === 'ios' ? 'root11' : 'root22',
     password: '123456789',
   });
 
