@@ -4,7 +4,7 @@ import {withScreenTransition} from '../components/hoc';
 import CardView from '../components/common/CardView';
 import StoreContext from '../store/StoreContext';
 import {fetchTasks} from '../api/task';
-import moment from 'moment';
+import {timeUtil} from '../tools';
 
 const DATA = [
   {
@@ -78,9 +78,7 @@ const TaskScreen = () => {
         <CardView style={styles.card}>
           <Text>{item.name}</Text>
           <Text>{item.point}积分</Text>
-          <Text>
-            截止时间：{moment(item.deadline).format('yyyy-MM-DD HH:mm:ss')}
-          </Text>
+          <Text>截止时间：{timeUtil.formatDateTime(item.deadline)}</Text>
         </CardView>
       )}
       renderSectionHeader={({section: {title}}) => <Text>{title}</Text>}>
