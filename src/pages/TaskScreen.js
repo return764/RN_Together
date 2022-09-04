@@ -1,5 +1,5 @@
 import React, {useCallback, useContext, useEffect, useState} from 'react';
-import {SectionList, StyleSheet, Text} from 'react-native';
+import {SectionList, StyleSheet} from 'react-native';
 import {withScreenTransition} from '../components/hoc';
 import StoreContext from '../store/StoreContext';
 import {fetchTasks} from '../api/task';
@@ -11,6 +11,16 @@ const DATA = [
   {
     title: '未完成',
     status: 0,
+    data: [],
+  },
+  {
+    title: '待审核',
+    status: 1,
+    data: [],
+  },
+  {
+    title: '已完成',
+    status: 2,
     data: [],
   },
 ];
@@ -64,8 +74,8 @@ const TaskScreen = () => {
       onRefresh={handleRefresh}
       sections={data}
       renderItem={({item}) => <TaskItem item={item} />}
-      renderSectionHeader={({section: {title}}) => (
-        <TaskSectionHeader title={title} />
+      renderSectionHeader={({section}) => (
+        <TaskSectionHeader section={section} />
       )}
     />
   );
