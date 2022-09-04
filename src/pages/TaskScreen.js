@@ -4,7 +4,7 @@ import {withScreenTransition} from '../components/hoc';
 import CardView from '../components/common/CardView';
 import StoreContext from '../store/StoreContext';
 import {fetchTasks} from '../api/task';
-import {timeUtil} from '../tools';
+import {timeUtil, arrObjUtils} from '../tools';
 
 const DATA = [
   {
@@ -26,20 +26,8 @@ const TaskScreen = () => {
   const setDataWithStatus = (dataOne, status) => {
     setData(prevData => {
       const foundData = prevData.find(item => item.status === status).data;
-      if (foundData === []) {
+      if (!arrObjUtils.containObject(foundData, dataOne, 'id')) {
         foundData.push(dataOne);
-      } else {
-        let isContains = false;
-        for (const dataItem of foundData) {
-          if (dataItem.id === dataOne.id) {
-            isContains = true;
-            break;
-          }
-        }
-
-        if (!isContains) {
-          foundData.push(dataOne);
-        }
       }
       return [...prevData];
     });
