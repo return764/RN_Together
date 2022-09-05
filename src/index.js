@@ -6,6 +6,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {gestureHandlerRootHOC} from 'react-native-gesture-handler';
 import {StoreContextProvider} from './store/StoreContext';
 import {clearStore} from './utils/store';
+import AxiosInterceptor from './components/common/AxiosInterceptor';
 
 DevSettings.addMenuItem('清除AsyncStore', async () => {
   await clearStore();
@@ -15,9 +16,11 @@ const App = () => {
   return (
     <>
       <StoreContextProvider>
-        <NavigationContainer>
-          <Navigators />
-        </NavigationContainer>
+        <AxiosInterceptor>
+          <NavigationContainer>
+            <Navigators />
+          </NavigationContainer>
+        </AxiosInterceptor>
       </StoreContextProvider>
       <Toast />
     </>

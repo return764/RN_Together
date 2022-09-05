@@ -12,6 +12,12 @@ const reducer = (state, {type, payload}) => {
         isBinding: !!payload.binding,
         loginUser: payload,
       };
+    case 'SIGN_OUT':
+      return {
+        ...state,
+        isSignIn: false,
+        loginUser: null,
+      };
     case 'REFRESH_USER':
       const isSignIn = !!payload;
 

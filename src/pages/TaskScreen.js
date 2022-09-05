@@ -1,5 +1,5 @@
 import React, {useCallback, useContext, useEffect, useState} from 'react';
-import {SectionList, StyleSheet} from 'react-native';
+import {SectionList, StyleSheet, View} from 'react-native';
 import {withScreenTransition} from '../components/hoc';
 import StoreContext from '../store/StoreContext';
 import {fetchTasks} from '../api/task';
@@ -72,8 +72,8 @@ const TaskScreen = () => {
   return (
     <>
       <SectionList
-        contentContainerStyle={{flexGrow: 1}}
         style={styles.container}
+        contentContainerStyle={{flexGrow: 1}}
         refreshing={refreshing}
         onRefresh={handleRefresh}
         sections={data}
