@@ -8,7 +8,8 @@ const Button = props => {
       activeOpacity={0.6}
       underlayColor={'#ddd'}
       style={styles.wrapButton}
-      onPress={props.onPress}>
+      onPress={props.onPress}
+      {...props}>
       <View style={styles.button}>
         <Text style={styles.text}>{props.title}</Text>
       </View>

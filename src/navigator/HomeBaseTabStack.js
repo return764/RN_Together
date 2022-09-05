@@ -1,8 +1,7 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React from 'react';
 import HomeScreen from '../pages/HomeScreen';
-import {Text, Animated, View} from 'react-native';
+import {Text} from 'react-native';
 import DashboardIcon from '../assets/icon/dashboard.svg';
-import TaskScreen from '../pages/TaskScreen';
 import TaskIcon from '../assets/icon/task.svg';
 import ShopScreen from '../pages/ShopScreen';
 import RockIcon from '../assets/icon/rock.svg';
@@ -10,6 +9,7 @@ import SettingScreen from '../pages/SettingScreen';
 import ToosIcon from '../assets/icon/toos.svg';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {colors} from '../utils/setting';
+import TaskStack from './TaskStack';
 
 const Tab = createBottomTabNavigator();
 const iconSize = 25;
@@ -26,9 +26,10 @@ const tabScreens = [
   },
   {
     name: 'Task',
-    component: TaskScreen,
+    component: TaskStack,
     options: {
       title: '任务',
+      headerShown: false,
       tabBarLabel: () => <Text>任务</Text>,
       tabBarIcon: () => <TaskIcon height={iconSize} width={iconSize} />,
     },

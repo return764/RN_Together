@@ -6,6 +6,8 @@ import {fetchTasks} from '../api/task';
 import {arrObjUtils} from '../tools';
 import {TaskItem} from '../components/Task/TaskItem';
 import {TaskSectionHeader} from '../components/Task/TaskSectionHeader';
+import Button from '../components/common/Button';
+import {useNavigation} from '@react-navigation/native';
 
 const DATA = [
   {
@@ -33,6 +35,7 @@ const TaskScreen = () => {
   const [tasks, setTasks] = useState([]);
   const [data, setData] = useState(DATA);
   const [refreshing, setRefreshing] = useState(false);
+  const navigation = useNavigation();
 
   const setDataWithStatus = (dataOne, status) => {
     setData(prevData => {
@@ -67,17 +70,25 @@ const TaskScreen = () => {
   };
 
   return (
-    <SectionList
-      contentContainerStyle={{flexGrow: 1}}
-      style={styles.container}
-      refreshing={refreshing}
-      onRefresh={handleRefresh}
-      sections={data}
-      renderItem={({item}) => <TaskItem item={item} />}
-      renderSectionHeader={({section}) => (
-        <TaskSectionHeader section={section} />
-      )}
-    />
+    <>
+      <SectionList
+        contentContainerStyle={{flexGrow: 1}}
+        style={styles.container}
+        refreshing={refreshing}
+        onRefresh={handleRefresh}
+        sections={data}
+        renderItem={({item}) => <TaskItem item={item} />}
+        renderSectionHeader={({section}) => (
+          <TaskSectionHeader section={section} />
+        )}
+      />
+      <Button
+        title={'新增'}
+        onPress={() => {
+          navigation.navigate('TaskCreate');
+        }}
+      />
+    </>
   );
 };
 
