@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
 import {RefreshControl, ScrollView, StyleSheet} from 'react-native';
-import StoreContext from '../store/StoreContext';
+import AuthContext from '../store/AuthContext';
 import UserBinding from '../components/UserBinding/index';
 import {withScreenTransition} from '../components/hoc';
 import {refreshUser} from '../api/user';
@@ -10,7 +10,7 @@ const HomeScreen = () => {
   const {
     state: {loginUser, isBinding},
     dispatch,
-  } = useContext(StoreContext);
+  } = useContext(AuthContext);
 
   const [refreshing, setRefreshing] = React.useState(false);
 

@@ -11,14 +11,14 @@ import {
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import {useNavigation} from '@react-navigation/native';
 import {login} from '../api/user';
-import StoreContext from '../store/StoreContext';
+import AuthContext from '../store/AuthContext';
 import {useForm} from '../hooks/UseForm';
 import Toast from 'react-native-toast-message';
 import {save} from '../utils/store';
 
 const SignInScreen = () => {
   const navigation = useNavigation();
-  const {dispatch} = useContext(StoreContext);
+  const {dispatch} = useContext(AuthContext);
 
   const [loginForm, , {setUsername, setPassword}] = useForm({
     username: Platform.OS === 'ios' ? 'root11' : 'root22',

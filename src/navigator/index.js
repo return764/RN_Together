@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import StoreContext from '../store/StoreContext';
+import AuthContext from '../store/AuthContext';
 import HomeBaseTabStack from './HomeBaseTabStack';
 import SignStack from './SignStack';
 import SplashScreen from '../pages/SplashScreen';
@@ -12,7 +12,7 @@ const TopStack = createNativeStackNavigator();
 const MyNavigator = () => {
   const {
     state: {isSignIn, isLoading},
-  } = useContext(StoreContext);
+  } = useContext(AuthContext);
 
   if (isLoading) {
     return <SplashScreen />;

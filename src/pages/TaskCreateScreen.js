@@ -6,14 +6,14 @@ import {timeUtil} from '../tools';
 import Button from '../components/common/Button';
 import {useForm} from '../hooks/UseForm';
 import {createTask} from '../api/task';
-import StoreContext from '../store/StoreContext';
+import AuthContext from '../store/AuthContext';
 import Toast from 'react-native-toast-message';
 
 const TaskCreateScreen = ({navigation}) => {
   enableLayoutAnimations(false);
   const {
     state: {loginUser},
-  } = useContext(StoreContext);
+  } = useContext(AuthContext);
   const [task, resetForm, {setName, setDescription, setPoint, setDeadline}] =
     useForm({
       name: '',

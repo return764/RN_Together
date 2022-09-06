@@ -1,10 +1,10 @@
 import React, {useContext, useMemo} from 'react';
 import Toast from 'react-native-toast-message';
 import request from '../../../utils/request';
-import StoreContext from '../../../store/StoreContext';
+import AuthContext from '../../../store/AuthContext';
 
 const AxiosInterceptor = ({children}) => {
-  const {dispatch} = useContext(StoreContext);
+  const {dispatch} = useContext(AuthContext);
 
   useMemo(() => {
     request.interceptors.response.use(

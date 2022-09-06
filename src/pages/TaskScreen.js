@@ -1,7 +1,7 @@
 import React, {useCallback, useContext, useEffect, useState} from 'react';
 import {SectionList, StyleSheet, View} from 'react-native';
 import {withScreenTransition} from '../components/hoc';
-import StoreContext from '../store/StoreContext';
+import AuthContext from '../store/AuthContext';
 import {fetchTasks} from '../api/task';
 import {arrObjUtils} from '../tools';
 import {TaskItem} from '../components/Task/TaskItem';
@@ -30,7 +30,7 @@ const DATA = [
 const TaskScreen = () => {
   const {
     state: {loginUser},
-  } = useContext(StoreContext);
+  } = useContext(AuthContext);
 
   const [tasks, setTasks] = useState([]);
   const [data, setData] = useState(DATA);

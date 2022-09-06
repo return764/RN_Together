@@ -2,7 +2,7 @@ import {StyleSheet, Text, TextInput} from 'react-native';
 import React, {useContext, useState} from 'react';
 import CardView from '../common/CardView';
 import Button from '../common/Button';
-import StoreContext from '../../store/StoreContext';
+import AuthContext from '../../store/AuthContext';
 import {material} from 'react-native-typography';
 import {colors} from '../../utils/setting';
 import {bindUser} from '../../api/user';
@@ -12,7 +12,7 @@ const UserBinding = () => {
   const {
     dispatch,
     state: {loginUser},
-  } = useContext(StoreContext);
+  } = useContext(AuthContext);
   const [identifyCode, setIdentifyCode] = useState('');
 
   const handleBindUser = async () => {

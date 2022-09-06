@@ -3,10 +3,10 @@ import {Button, StyleSheet, TextInput, View} from 'react-native';
 import {useForm} from '../hooks/UseForm';
 import Toast from 'react-native-toast-message';
 import {register} from '../api/user';
-import StoreContext from '../store/StoreContext';
+import AuthContext from '../store/AuthContext';
 
 const SignUpScreen = () => {
-  const {dispatch} = useContext(StoreContext);
+  const {dispatch} = useContext(AuthContext);
   const [form, , {setUsername, setNickname, setPassword, setPasswordRepeat}] =
     useForm({
       username: '',

@@ -1,7 +1,7 @@
 import React, {createContext, useEffect, useReducer} from 'react';
 import {load} from '../utils/store';
 
-const StoreContext = createContext({});
+const AuthContext = createContext({});
 
 const reducer = (state, {type, payload}) => {
   switch (type) {
@@ -45,7 +45,7 @@ const initialState = {
   isLoading: true,
 };
 
-export const StoreContextProvider = ({children}) => {
+export const AuthContextProvider = ({children}) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
@@ -56,10 +56,10 @@ export const StoreContextProvider = ({children}) => {
   }, []);
 
   return (
-    <StoreContext.Provider value={{state, dispatch}}>
+    <AuthContext.Provider value={{state, dispatch}}>
       {children}
-    </StoreContext.Provider>
+    </AuthContext.Provider>
   );
 };
 
-export default StoreContext;
+export default AuthContext;
