@@ -29,7 +29,7 @@ const DATA = [
 
 const TaskScreen = () => {
   const {
-    state: {loginUser},
+    state: {user},
   } = useContext(AuthContext);
 
   const [tasks, setTasks] = useState([]);
@@ -54,16 +54,16 @@ const TaskScreen = () => {
   }, []);
 
   const loadTasks = useCallback(async () => {
-    const result = await fetchTasks(loginUser.id);
+    const result = await fetchTasks(user.id);
     if (result) {
       setTasks(result);
       setFormatTasks(result);
     }
-  }, [loginUser.id, setFormatTasks]);
+  }, [user.id, setFormatTasks]);
 
   useEffect(() => {
     loadTasks().then(r => r);
-  }, [loadTasks, loginUser.id, setFormatTasks]);
+  }, [loadTasks, user.id, setFormatTasks]);
 
   const handleRefresh = async () => {
     setRefreshing(true);

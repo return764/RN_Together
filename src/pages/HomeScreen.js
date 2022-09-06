@@ -8,7 +8,7 @@ import PointStatistic from '../components/PointStatistic';
 
 const HomeScreen = () => {
   const {
-    state: {loginUser, isBinding},
+    state: {user, isBinding},
     dispatch,
   } = useContext(AuthContext);
 
@@ -33,7 +33,7 @@ const HomeScreen = () => {
       {!isBinding ? (
         <UserBinding />
       ) : (
-        <PointStatistic currentUser={loginUser} bindUser={loginUser.binding} />
+        <PointStatistic currentUser={user} bindUser={user.binding} />
       )}
     </ScrollView>
   );

@@ -10,13 +10,13 @@ const reducer = (state, {type, payload}) => {
         ...state,
         isSignIn: true,
         isBinding: !!payload.binding,
-        loginUser: payload,
+        user: payload,
       };
     case 'SIGN_OUT':
       return {
         ...state,
         isSignIn: false,
-        loginUser: null,
+        user: null,
       };
     case 'REFRESH_USER':
       const isSignIn = !!payload;
@@ -24,7 +24,7 @@ const reducer = (state, {type, payload}) => {
       return {
         ...state,
         isSignIn,
-        loginUser: payload,
+        user: payload,
         isBinding: isSignIn && !!payload.binding,
         isLoading: false,
       };
@@ -39,7 +39,7 @@ const reducer = (state, {type, payload}) => {
 };
 
 const initialState = {
-  loginUser: null,
+  user: null,
   isSignIn: false,
   isBinding: false,
   isLoading: true,

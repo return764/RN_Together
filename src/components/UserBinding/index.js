@@ -11,12 +11,12 @@ import Toast from 'react-native-toast-message';
 const UserBinding = () => {
   const {
     dispatch,
-    state: {loginUser},
+    state: {user},
   } = useContext(AuthContext);
   const [identifyCode, setIdentifyCode] = useState('');
 
   const handleBindUser = async () => {
-    const result = await bindUser(loginUser.id, identifyCode);
+    const result = await bindUser(user.id, identifyCode);
     if (result) {
       Toast.show({
         type: 'success',
@@ -37,7 +37,7 @@ const UserBinding = () => {
       <Text style={styles.textEl}>
         您的识别码:
         <Text style={{...material.headline, color: colors.tertiary}}>
-          {loginUser.identifyCode}
+          {user.identifyCode}
         </Text>
       </Text>
       <Button title="绑定" onPress={handleBindUser} />
