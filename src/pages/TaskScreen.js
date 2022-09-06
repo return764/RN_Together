@@ -8,6 +8,7 @@ import {TaskItem} from '../components/Task/TaskItem';
 import {TaskSectionHeader} from '../components/Task/TaskSectionHeader';
 import Button from '../components/common/Button';
 import {useNavigation} from '@react-navigation/native';
+import {useAuthentication} from '../hooks/UseAuthentication';
 
 const DATA = [
   {
@@ -28,9 +29,7 @@ const DATA = [
 ];
 
 const TaskScreen = () => {
-  const {
-    state: {user},
-  } = useContext(AuthContext);
+  const user = useAuthentication();
 
   const [tasks, setTasks] = useState([]);
   const [data, setData] = useState(DATA);

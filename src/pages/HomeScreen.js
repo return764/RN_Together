@@ -1,20 +1,22 @@
-import React, {useContext} from 'react';
+import React, {useCallback, useContext, useState} from 'react';
 import {RefreshControl, ScrollView, StyleSheet} from 'react-native';
 import AuthContext from '../store/AuthContext';
 import UserBinding from '../components/UserBinding/index';
 import {withScreenTransition} from '../components/hoc';
 import {refreshUser} from '../api/user';
 import PointStatistic from '../components/PointStatistic';
+import {useAuthentication} from '../hooks/UseAuthentication';
 
 const HomeScreen = () => {
   const {
-    state: {user, isBinding},
+    state: {binding, isBinding},
     dispatch,
   } = useContext(AuthContext);
 
-  const [refreshing, setRefreshing] = React.useState(false);
+  const user = useAuthentication();
+  const [refreshing, setRefreshing] = useState(false);
 
-  const onRefresh = React.useCallback(async () => {
+  const onRefresh = useCallback(async () => {
     setRefreshing(true);
 
     // 加载数据
@@ -33,7 +35,7 @@ const HomeScreen = () => {
       {!isBinding ? (
         <UserBinding />
       ) : (
-        <PointStatistic currentUser={user} bindUser={user.binding} />
+        <PointStatistic currentUser={user} bindUser={binding} />
       )}
     </ScrollView>
   );

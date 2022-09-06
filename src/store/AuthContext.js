@@ -8,30 +8,32 @@ const reducer = (state, {type, payload}) => {
     case 'LOGIN':
       return {
         ...state,
-        isSignIn: true,
-        isBinding: !!payload.binding,
         user: payload,
+        isSignIn: true,
+        binding: payload.binding,
+        isBinding: !!payload.binding,
       };
     case 'SIGN_OUT':
       return {
-        ...state,
-        isSignIn: false,
-        user: null,
+        ...initialState,
+        isLoading: false,
       };
     case 'REFRESH_USER':
       const isSignIn = !!payload;
+      if (!isSignIn) {
+        return {
+          ...initialState,
+          isLoading: false,
+        };
+      }
 
       return {
         ...state,
         isSignIn,
         user: payload,
-        isBinding: isSignIn && !!payload.binding,
         isLoading: false,
-      };
-    case 'BINDING':
-      return {
-        ...state,
-        isBinding: true,
+        binding: payload.binding,
+        isBinding: isSignIn && !!payload.binding,
       };
     default:
       throw new Error();
@@ -40,6 +42,7 @@ const reducer = (state, {type, payload}) => {
 
 const initialState = {
   user: null,
+  binding: null,
   isSignIn: false,
   isBinding: false,
   isLoading: true,

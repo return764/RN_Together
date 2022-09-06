@@ -12,14 +12,14 @@ import Toast from 'react-native-toast-message';
 const TaskCreateScreen = ({navigation}) => {
   enableLayoutAnimations(false);
   const {
-    state: {loginUser},
+    state: {binding},
   } = useContext(AuthContext);
   const [task, resetForm, {setName, setDescription, setPoint, setDeadline}] =
     useForm({
       name: '',
       description: '',
       point: '',
-      targetId: loginUser.binding.id,
+      targetId: binding.id,
       deadline: '',
     });
   const [isDatePickerVisible, setIsDatePickerVisible] = useState(false);

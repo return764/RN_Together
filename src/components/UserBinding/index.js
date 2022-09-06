@@ -7,12 +7,11 @@ import {material} from 'react-native-typography';
 import {colors} from '../../utils/setting';
 import {bindUser} from '../../api/user';
 import Toast from 'react-native-toast-message';
+import {useAuthentication} from '../../hooks/UseAuthentication';
 
 const UserBinding = () => {
-  const {
-    dispatch,
-    state: {user},
-  } = useContext(AuthContext);
+  const {dispatch} = useContext(AuthContext);
+  const user = useAuthentication();
   const [identifyCode, setIdentifyCode] = useState('');
 
   const handleBindUser = async () => {
@@ -23,7 +22,6 @@ const UserBinding = () => {
         text1: '绑定用户成功',
       });
       dispatch({type: 'REFRESH_USER', payload: result});
-      dispatch({type: 'BINDING'});
     }
   };
 
