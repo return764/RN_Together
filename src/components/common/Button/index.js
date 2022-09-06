@@ -7,7 +7,7 @@ const Button = props => {
     <TouchableHighlight
       activeOpacity={0.6}
       underlayColor={'#ddd'}
-      style={styles.wrapButton}
+      style={[styles.wrapButton, props.style]}
       onPress={props.onPress}
       {...props}>
       <View style={styles.button}>
@@ -20,11 +20,16 @@ const Button = props => {
 const styles = StyleSheet.create({
   wrapButton: {
     borderRadius: 5,
+    height: 40,
   },
   button: {
+    height: '100%',
+    width: '100%',
     alignItems: 'center',
     backgroundColor: colors.primary,
     borderRadius: 5,
+    textAlignVertical: 'center',
+    justifyContent: 'center',
     padding: 10,
   },
   text: {

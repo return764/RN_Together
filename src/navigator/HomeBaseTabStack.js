@@ -9,7 +9,7 @@ import SettingScreen from '../pages/SettingScreen';
 import ToosIcon from '../assets/icon/toos.svg';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {colors} from '../utils/setting';
-import TaskStack from './TaskStack';
+import TaskScreen from '../pages/TaskScreen';
 
 const Tab = createBottomTabNavigator();
 const iconSize = 25;
@@ -26,10 +26,9 @@ const tabScreens = [
   },
   {
     name: 'Task',
-    component: TaskStack,
+    component: TaskScreen,
     options: {
       title: '任务',
-      headerShown: false,
       tabBarLabel: () => <Text>任务</Text>,
       tabBarIcon: () => <TaskIcon height={iconSize} width={iconSize} />,
     },

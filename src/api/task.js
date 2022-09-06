@@ -11,4 +11,13 @@ const fetchTasks = async (sourceUserId = null, status = null) => {
   }
 };
 
-export {fetchTasks};
+const createTask = async task => {
+  try {
+    const result = await request.post('/tasks', task);
+    return result.data;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export {fetchTasks, createTask};

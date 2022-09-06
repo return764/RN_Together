@@ -7,6 +7,7 @@ export const useForm = initForm => {
   }
 
   const [form, setForm] = useState(initForm);
+  const resetForm = () => setForm(initForm);
   let setters = {};
 
   const fields = Object.keys(initForm);
@@ -22,5 +23,5 @@ export const useForm = initForm => {
     };
   }
 
-  return [form, setForm, setters];
+  return [form, resetForm, setters];
 };

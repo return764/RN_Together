@@ -55,8 +55,10 @@ const TaskScreen = () => {
 
   const loadTasks = useCallback(async () => {
     const result = await fetchTasks(loginUser.id);
-    setTasks(result);
-    setFormatTasks(result);
+    if (result) {
+      setTasks(result);
+      setFormatTasks(result);
+    }
   }, [loginUser.id, setFormatTasks]);
 
   useEffect(() => {

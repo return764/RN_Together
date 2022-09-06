@@ -11,7 +11,7 @@ const AxiosInterceptor = ({children}) => {
       response => response,
       error => {
         const {response} = error;
-        console.log(response);
+        console.log('axios', response);
         if (response && (response.status === 400 || response.status === 500)) {
           Toast.show({
             type: 'error',
@@ -32,7 +32,7 @@ const AxiosInterceptor = ({children}) => {
         return Promise.reject(error);
       },
     );
-  }, []);
+  }, [dispatch]);
 
   return children;
 };

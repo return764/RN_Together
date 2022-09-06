@@ -4,6 +4,8 @@ import StoreContext from '../store/StoreContext';
 import HomeBaseTabStack from './HomeBaseTabStack';
 import SignStack from './SignStack';
 import SplashScreen from '../pages/SplashScreen';
+import TaskCreateScreen from '../pages/TaskCreateScreen';
+import {colors} from '../utils/setting';
 
 const TopStack = createNativeStackNavigator();
 
@@ -19,9 +21,23 @@ const MyNavigator = () => {
   return (
     <TopStack.Navigator screenOptions={{headerShown: false}}>
       {isSignIn ? (
-        <TopStack.Screen name="A" component={HomeBaseTabStack} />
+        <>
+          <TopStack.Screen name="HomeStack" component={HomeBaseTabStack} />
+          <TopStack.Screen
+            name="TaskCreate"
+            options={{
+              headerShown: true,
+              title: '新增任务',
+              headerTintColor: colors.secondary,
+              headerStyle: {
+                backgroundColor: colors.primary,
+              },
+            }}
+            component={TaskCreateScreen}
+          />
+        </>
       ) : (
-        <TopStack.Screen name="B" component={SignStack} />
+        <TopStack.Screen name="SignStack" component={SignStack} />
       )}
     </TopStack.Navigator>
   );
