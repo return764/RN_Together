@@ -4,15 +4,15 @@ import {AuthType} from './config';
 
 const AuthContext = createContext({});
 
-const reducer = (state, {type, payload}) => {
+const reducer = (state, {type, payload: user}) => {
   switch (type) {
     case AuthType.LOGIN:
       return {
         ...state,
-        user: payload,
+        user,
         isSignIn: true,
-        binding: payload.binding,
-        isBinding: !!payload.binding,
+        binding: user.binding,
+        isBinding: !!user.binding,
       };
     case AuthType.LOGOUT:
       return {
@@ -20,7 +20,7 @@ const reducer = (state, {type, payload}) => {
         isLoading: false,
       };
     case AuthType.REFRESH_USER:
-      const isSignIn = !!payload;
+      const isSignIn = !!user;
       if (!isSignIn) {
         return {
           ...initialState,
@@ -31,10 +31,10 @@ const reducer = (state, {type, payload}) => {
       return {
         ...state,
         isSignIn,
-        user: payload,
+        user,
         isLoading: false,
-        binding: payload.binding,
-        isBinding: isSignIn && !!payload.binding,
+        binding: user.binding,
+        isBinding: isSignIn && !!user.binding,
       };
     default:
       throw new Error();
