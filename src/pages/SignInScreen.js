@@ -15,6 +15,7 @@ import AuthContext from '../store/AuthContext';
 import {useForm} from '../hooks/UseForm';
 import Toast from 'react-native-toast-message';
 import {save} from '../utils/store';
+import {AuthType} from '../store/config';
 
 const SignInScreen = () => {
   const navigation = useNavigation();
@@ -37,7 +38,7 @@ const SignInScreen = () => {
         text1: '登录成功!',
       });
       await save('@user', loginUser);
-      dispatch({type: 'LOGIN', payload: loginUser});
+      dispatch({type: AuthType.LOGIN, payload: loginUser});
       // 导航至主页
     }
   };

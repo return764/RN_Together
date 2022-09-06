@@ -1,11 +1,12 @@
 import React, {createContext, useEffect, useReducer} from 'react';
 import {load} from '../utils/store';
+import {AuthType} from './config';
 
 const AuthContext = createContext({});
 
 const reducer = (state, {type, payload}) => {
   switch (type) {
-    case 'LOGIN':
+    case AuthType.LOGIN:
       return {
         ...state,
         user: payload,
@@ -13,12 +14,12 @@ const reducer = (state, {type, payload}) => {
         binding: payload.binding,
         isBinding: !!payload.binding,
       };
-    case 'SIGN_OUT':
+    case AuthType.LOGOUT:
       return {
         ...initialState,
         isLoading: false,
       };
-    case 'REFRESH_USER':
+    case AuthType.REFRESH_USER:
       const isSignIn = !!payload;
       if (!isSignIn) {
         return {
@@ -54,7 +55,7 @@ export const AuthContextProvider = ({children}) => {
   useEffect(() => {
     (async () => {
       const user = await load('@user');
-      dispatch({type: 'REFRESH_USER', payload: user});
+      dispatch({type: AuthType.REFRESH_USER, payload: user});
     })();
   }, []);
 

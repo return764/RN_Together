@@ -2,6 +2,7 @@ import React, {useContext, useMemo} from 'react';
 import Toast from 'react-native-toast-message';
 import request from '../../../utils/request';
 import AuthContext from '../../../store/AuthContext';
+import {AuthType} from '../../../store/config';
 
 const AxiosInterceptor = ({children}) => {
   const {dispatch} = useContext(AuthContext);
@@ -20,7 +21,7 @@ const AxiosInterceptor = ({children}) => {
         }
 
         if (response && response.status === 401) {
-          dispatch({type: 'SIGN_OUT'});
+          dispatch({type: AuthType.LOGOUT});
         }
 
         if (response && response.status === 403) {

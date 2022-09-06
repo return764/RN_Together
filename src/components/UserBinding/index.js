@@ -8,6 +8,7 @@ import {colors} from '../../utils/setting';
 import {bindUser} from '../../api/user';
 import Toast from 'react-native-toast-message';
 import {useAuthentication} from '../../hooks/UseAuthentication';
+import {AuthType} from '../../store/config';
 
 const UserBinding = () => {
   const {dispatch} = useContext(AuthContext);
@@ -21,7 +22,7 @@ const UserBinding = () => {
         type: 'success',
         text1: '绑定用户成功',
       });
-      dispatch({type: 'REFRESH_USER', payload: result});
+      dispatch({type: AuthType.REFRESH_USER, payload: result});
     }
   };
 

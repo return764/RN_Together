@@ -4,9 +4,9 @@ import {DevSettings, StyleSheet} from 'react-native';
 import Toast from 'react-native-toast-message';
 import {NavigationContainer} from '@react-navigation/native';
 import {gestureHandlerRootHOC} from 'react-native-gesture-handler';
-import {AuthContextProvider} from './store/AuthContext';
 import {clearStore} from './utils/store';
 import AxiosInterceptor from './components/common/AxiosInterceptor';
+import StoreContextProvider from './store';
 
 DevSettings.addMenuItem('清除AsyncStore', async () => {
   await clearStore();
@@ -15,13 +15,13 @@ DevSettings.addMenuItem('清除AsyncStore', async () => {
 const App = () => {
   return (
     <>
-      <AuthContextProvider>
+      <StoreContextProvider>
         <AxiosInterceptor>
           <NavigationContainer>
             <Navigators />
           </NavigationContainer>
         </AxiosInterceptor>
-      </AuthContextProvider>
+      </StoreContextProvider>
       <Toast />
     </>
   );

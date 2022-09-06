@@ -6,6 +6,7 @@ import {withScreenTransition} from '../components/hoc';
 import {refreshUser} from '../api/user';
 import PointStatistic from '../components/PointStatistic';
 import {useAuthentication} from '../hooks/UseAuthentication';
+import {AuthType} from '../store/config';
 
 const HomeScreen = () => {
   const {
@@ -21,7 +22,7 @@ const HomeScreen = () => {
 
     // 加载数据
     const data = await refreshUser();
-    dispatch({type: 'REFRESH_USER', payload: data});
+    dispatch({type: AuthType.REFRESH_USER, payload: data});
     setRefreshing(false);
   }, [dispatch]);
 

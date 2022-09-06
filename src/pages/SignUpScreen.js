@@ -4,6 +4,7 @@ import {useForm} from '../hooks/UseForm';
 import Toast from 'react-native-toast-message';
 import {register} from '../api/user';
 import AuthContext from '../store/AuthContext';
+import {AuthType} from '../store/config';
 
 const SignUpScreen = () => {
   const {dispatch} = useContext(AuthContext);
@@ -37,7 +38,7 @@ const SignUpScreen = () => {
         Toast.show({
           text1: '登录成功!',
         });
-        dispatch({type: 'LOGIN', payload: user});
+        dispatch({type: AuthType.LOGIN, payload: user});
         // 导航至主页
       }
     }
