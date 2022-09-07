@@ -16,6 +16,7 @@ import {useForm} from '../hooks/UseForm';
 import Toast from 'react-native-toast-message';
 import {save} from '../utils/store';
 import {AuthType} from '../store/config';
+import {gestureHandlerRootHOC} from 'react-native-gesture-handler';
 
 const SignInScreen = () => {
   const navigation = useNavigation();
@@ -112,4 +113,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SignInScreen;
+export default gestureHandlerRootHOC(SignInScreen);

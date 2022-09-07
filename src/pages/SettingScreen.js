@@ -1,6 +1,7 @@
 import React from 'react';
 import {Text, View} from 'react-native';
 import {withScreenTransition} from '../components/hoc';
+import {gestureHandlerRootHOC} from 'react-native-gesture-handler';
 
 const SettingScreen = () => {
   return (
@@ -10,4 +11,4 @@ const SettingScreen = () => {
   );
 };
 
-export default withScreenTransition(SettingScreen);
+export default gestureHandlerRootHOC(withScreenTransition(SettingScreen));

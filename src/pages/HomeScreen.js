@@ -7,6 +7,7 @@ import {refreshUser} from '../api/user';
 import PointStatistic from '../components/PointStatistic';
 import {useAuthentication} from '../hooks/UseAuthentication';
 import {AuthType} from '../store/config';
+import {gestureHandlerRootHOC} from 'react-native-gesture-handler';
 
 const HomeScreen = () => {
   const {
@@ -51,4 +52,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withScreenTransition(HomeScreen);
+export default gestureHandlerRootHOC(withScreenTransition(HomeScreen));

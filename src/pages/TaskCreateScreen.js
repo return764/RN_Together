@@ -10,6 +10,7 @@ import AuthContext from '../store/AuthContext';
 import Toast from 'react-native-toast-message';
 import TaskContext from '../store/TaskContext';
 import {TaskType} from '../store/config';
+import {gestureHandlerRootHOC} from 'react-native-gesture-handler';
 
 const TaskCreateScreen = ({navigation}) => {
   enableLayoutAnimations(false);
@@ -125,4 +126,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TaskCreateScreen;
+export default gestureHandlerRootHOC(TaskCreateScreen);

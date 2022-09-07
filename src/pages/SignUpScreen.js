@@ -5,6 +5,7 @@ import Toast from 'react-native-toast-message';
 import {register} from '../api/user';
 import AuthContext from '../store/AuthContext';
 import {AuthType} from '../store/config';
+import {gestureHandlerRootHOC} from 'react-native-gesture-handler';
 
 const SignUpScreen = () => {
   const {dispatch} = useContext(AuthContext);
@@ -91,4 +92,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SignUpScreen;
+export default gestureHandlerRootHOC(SignUpScreen);

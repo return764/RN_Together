@@ -10,6 +10,7 @@ import {useNavigation} from '@react-navigation/native';
 import {useAuthentication} from '../hooks/UseAuthentication';
 import TaskContext from '../store/TaskContext';
 import {TaskType} from '../store/config';
+import {gestureHandlerRootHOC} from 'react-native-gesture-handler';
 
 const DATA = [
   {
@@ -103,4 +104,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withScreenTransition(TaskScreen);
+export default gestureHandlerRootHOC(withScreenTransition(TaskScreen));
