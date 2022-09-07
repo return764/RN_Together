@@ -1,20 +1,25 @@
 import React, {createContext, useReducer} from 'react';
+import {TaskType} from './config';
 
-const reducer = (state, {type, payload}) => {
+const reducer = (tasks, {type, payload}) => {
   switch (type) {
+    case TaskType.REFRESH:
+      return [...payload];
+    case TaskType.ADD:
+      return [...tasks, payload];
+    default:
+      throw new Error();
   }
 };
 
 const TaskContext = createContext({});
-const initialState = {
-  tasks: [],
-};
+const initialTasks = [];
 
 export const TaskContextProvider = ({children}) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [tasks, dispatch] = useReducer(reducer, initialTasks);
 
   return (
-    <TaskContext.Provider value={{state, dispatch}}>
+    <TaskContext.Provider value={{tasks, dispatch}}>
       {children}
     </TaskContext.Provider>
   );

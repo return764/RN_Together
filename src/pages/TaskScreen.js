@@ -1,7 +1,6 @@
 import React, {useCallback, useContext, useEffect, useState} from 'react';
-import {SectionList, StyleSheet, View} from 'react-native';
+import {SectionList, StyleSheet} from 'react-native';
 import {withScreenTransition} from '../components/hoc';
-import AuthContext from '../store/AuthContext';
 import {fetchTasks} from '../api/task';
 import {arrObjUtils} from '../tools';
 import {TaskItem} from '../components/Task/TaskItem';
@@ -9,6 +8,8 @@ import {TaskSectionHeader} from '../components/Task/TaskSectionHeader';
 import Button from '../components/common/Button';
 import {useNavigation} from '@react-navigation/native';
 import {useAuthentication} from '../hooks/UseAuthentication';
+import TaskContext from '../store/TaskContext';
+import {TaskType} from '../store/config';
 
 const DATA = [
   {
@@ -30,8 +31,8 @@ const DATA = [
 
 const TaskScreen = () => {
   const user = useAuthentication();
+  const {tasks, dispatch} = useContext(TaskContext);
 
-  const [tasks, setTasks] = useState([]);
   const [data, setData] = useState(DATA);
   const [refreshing, setRefreshing] = useState(false);
   const navigation = useNavigation();
@@ -46,7 +47,7 @@ const TaskScreen = () => {
     });
   };
 
-  const setFormatTasks = useCallback(taskList => {
+  const setFormatData = useCallback(taskList => {
     taskList.forEach(task => {
       setDataWithStatus(task, task.status);
     });
@@ -55,14 +56,17 @@ const TaskScreen = () => {
   const loadTasks = useCallback(async () => {
     const result = await fetchTasks(user.id);
     if (result) {
-      setTasks(result);
-      setFormatTasks(result);
+      dispatch({type: TaskType.REFRESH, payload: result});
     }
-  }, [user.id, setFormatTasks]);
+  }, [user.id, dispatch]);
 
   useEffect(() => {
     loadTasks().then(r => r);
-  }, [loadTasks, user.id, setFormatTasks]);
+  }, [loadTasks, user.id]);
+
+  useEffect(() => {
+    setFormatData(tasks);
+  }, [setFormatData, tasks]);
 
   const handleRefresh = async () => {
     setRefreshing(true);

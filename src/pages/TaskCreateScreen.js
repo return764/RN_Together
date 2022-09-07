@@ -8,12 +8,16 @@ import {useForm} from '../hooks/UseForm';
 import {createTask} from '../api/task';
 import AuthContext from '../store/AuthContext';
 import Toast from 'react-native-toast-message';
+import TaskContext from '../store/TaskContext';
+import {TaskType} from '../store/config';
 
 const TaskCreateScreen = ({navigation}) => {
   enableLayoutAnimations(false);
   const {
     state: {binding},
   } = useContext(AuthContext);
+
+  const {dispatch} = useContext(TaskContext);
   const [task, resetForm, {setName, setDescription, setPoint, setDeadline}] =
     useForm({
       name: '',
@@ -35,6 +39,7 @@ const TaskCreateScreen = ({navigation}) => {
         text1: '创建任务成功',
       });
       resetForm();
+      dispatch({type: TaskType.ADD, payload: result});
       navigation.navigate('HomeStack', {screen: 'Task'});
     }
   };
