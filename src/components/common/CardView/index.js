@@ -1,11 +1,13 @@
 import {StyleSheet, View} from 'react-native';
 import React from 'react';
-import Animated, {SlideInDown, SlideOutRight} from 'react-native-reanimated';
+import Animated, {SlideInLeft, SlideOutRight} from 'react-native-reanimated';
 
 const CardView = ({children, ...props}) => {
   return (
-    <Animated.View {...props} entering={SlideInDown} exiting={SlideOutRight}>
-      <View style={[styles.cardWrap]}>{children}</View>
+    <Animated.View {...props} entering={SlideInLeft} exiting={SlideOutRight}>
+      <View onLayout={props.onLayout} style={[styles.cardWrap]}>
+        {children}
+      </View>
     </Animated.View>
   );
 };
@@ -13,7 +15,7 @@ const CardView = ({children, ...props}) => {
 const styles = StyleSheet.create({
   cardWrap: {
     padding: 15,
-    borderRadius: 5,
+    borderRadius: 15,
     backgroundColor: '#dee',
   },
 });

@@ -1,4 +1,10 @@
-import React, {useCallback, useContext, useEffect, useState} from 'react';
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import {SectionList, StyleSheet} from 'react-native';
 import {withScreenTransition} from '../components/hoc';
 import {fetchTasks} from '../api/task';
@@ -10,7 +16,11 @@ import {useNavigation} from '@react-navigation/native';
 import {useAuthentication} from '../hooks/UseAuthentication';
 import TaskContext from '../store/TaskContext';
 import {TaskType} from '../store/config';
-import {gestureHandlerRootHOC} from 'react-native-gesture-handler';
+import {
+  createNativeWrapper,
+  gestureHandlerRootHOC,
+  NativeViewGestureHandler,
+} from 'react-native-gesture-handler';
 
 const DATA = [
   {
@@ -33,6 +43,7 @@ const DATA = [
 const TaskScreen = () => {
   const user = useAuthentication();
   const {tasks, dispatch} = useContext(TaskContext);
+  const scrollRef = useRef(null);
 
   const [data, setData] = useState(DATA);
   const [refreshing, setRefreshing] = useState(false);
@@ -77,17 +88,21 @@ const TaskScreen = () => {
 
   return (
     <>
-      <SectionList
-        style={styles.container}
-        contentContainerStyle={{flexGrow: 1}}
-        refreshing={refreshing}
-        onRefresh={handleRefresh}
-        sections={data}
-        renderItem={({item}) => <TaskItem item={item} />}
-        renderSectionHeader={({section}) => (
-          <TaskSectionHeader section={section} />
-        )}
-      />
+      <NativeViewGestureHandler ref={scrollRef}>
+        <SectionList
+          style={styles.container}
+          contentContainerStyle={{flexGrow: 1}}
+          refreshing={refreshing}
+          onRefresh={handleRefresh}
+          sections={data}
+          renderItem={({item}) => (
+            <TaskItem simultaneousHandlers={scrollRef} item={item} />
+          )}
+          renderSectionHeader={({section}) => (
+            <TaskSectionHeader section={section} />
+          )}
+        />
+      </NativeViewGestureHandler>
       <Button
         title={'新增'}
         onPress={() => {
