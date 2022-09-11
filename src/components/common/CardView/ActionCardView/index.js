@@ -7,7 +7,8 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import {Gesture} from 'react-native-gesture-handler';
-import {Dimensions, StyleSheet, Text} from 'react-native';
+import {Dimensions, StyleSheet} from 'react-native';
+import Action from './Action';
 
 const {width: SCREEN_WIDTH} = Dimensions.get('window');
 const TRANSLATE_X_THRESHOLD = -SCREEN_WIDTH * 0.2;
@@ -71,14 +72,16 @@ const ActionCardView = ({children, simultaneousHandlers, ...props}) => {
 
   return (
     <Animated.View>
-      <Animated.View
-        style={[styles.actionContainer, styles.action1, cardActionStyle]}>
-        <Text style={styles.actionText}>详情</Text>
-      </Animated.View>
-      <Animated.View
-        style={[styles.actionContainer, styles.action2, cardActionStyle]}>
-        <Text style={styles.actionText}>完成</Text>
-      </Animated.View>
+      <Action
+        text="详情"
+        style={styles.action1}
+        width={cardActionStyle.width}
+      />
+      <Action
+        text="完成"
+        style={styles.action2}
+        width={cardActionStyle.width}
+      />
       <GestureDetector gesture={gesture}>
         <CardView
           {...props}
@@ -103,19 +106,11 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     backgroundColor: '#dee',
   },
-  actionContainer: {
-    position: 'absolute',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  actionText: {
-    fontSize: 15,
-  },
   action1: {
     right: 0,
   },
   action2: {
-    right: '20%',
+    right: '18%',
   },
 });
 
