@@ -1,7 +1,6 @@
 import {StyleSheet, View} from 'react-native';
 import React from 'react';
 import Animated, {SlideInLeft, SlideOutRight} from 'react-native-reanimated';
-import {colors} from '../../../utils/setting';
 
 const CardView = ({children, ...props}) => {
   return (

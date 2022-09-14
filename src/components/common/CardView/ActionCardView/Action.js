@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 import Animated from 'react-native-reanimated';
 
-const Action = ({width, text, style}) => {
+const Action = ({width, text, style, onAction}) => {
   return (
     <Animated.View
       style={[
@@ -12,7 +12,7 @@ const Action = ({width, text, style}) => {
           width: width,
         },
       ]}>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={onAction}>
         <Text style={styles.actionText}>{text}</Text>
       </TouchableOpacity>
     </Animated.View>

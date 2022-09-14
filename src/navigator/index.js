@@ -6,6 +6,7 @@ import SignStack from './SignStack';
 import SplashScreen from '../pages/SplashScreen';
 import TaskCreateScreen from '../pages/TaskCreateScreen';
 import {colors} from '../utils/setting';
+import TaskDetailScreen from '../pages/TaskDetailScreen';
 
 const TopStack = createNativeStackNavigator();
 
@@ -32,8 +33,22 @@ const MyNavigator = () => {
               headerStyle: {
                 backgroundColor: colors.primary,
               },
+              headerBackTitleVisible: false,
             }}
             component={TaskCreateScreen}
+          />
+          <TopStack.Screen
+            name="TaskDetail"
+            options={{
+              headerShown: true,
+              title: '任务详情',
+              headerTintColor: colors.secondary,
+              headerStyle: {
+                backgroundColor: colors.primary,
+              },
+              headerBackTitleVisible: false,
+            }}
+            component={TaskDetailScreen}
           />
         </>
       ) : (
