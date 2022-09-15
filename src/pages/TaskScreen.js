@@ -7,8 +7,7 @@ import React, {
 } from 'react';
 import {SectionList, StyleSheet} from 'react-native';
 import {withScreenTransition} from '../components/hoc';
-import {fetchTasks} from '../api/task';
-import {arrObjUtils} from '../tools';
+import {fetchTasks, TaskStatus} from '../api/task';
 import {TaskItem} from '../components/Task/TaskItem';
 import {TaskSectionHeader} from '../components/Task/TaskSectionHeader';
 import Button from '../components/common/Button';
@@ -17,7 +16,6 @@ import {useAuthentication} from '../hooks/UseAuthentication';
 import TaskContext from '../store/TaskContext';
 import {TaskType} from '../store/config';
 import {
-  createNativeWrapper,
   gestureHandlerRootHOC,
   NativeViewGestureHandler,
 } from 'react-native-gesture-handler';
@@ -49,19 +47,18 @@ const TaskScreen = () => {
   const [refreshing, setRefreshing] = useState(false);
   const navigation = useNavigation();
 
-  const setDataWithStatus = (dataOne, status) => {
-    setData(prevData => {
-      const foundData = prevData.find(item => item.status === status).data;
-      if (!arrObjUtils.containObject(foundData, dataOne, 'id')) {
-        foundData.push(dataOne);
-      }
-      return [...prevData];
-    });
-  };
-
   const setFormatData = useCallback(taskList => {
-    taskList.forEach(task => {
-      setDataWithStatus(task, task.status);
+    const dividedByStatusTask = {};
+    for (const status of Object.values(TaskStatus)) {
+      dividedByStatusTask[status] = taskList.filter(
+        task => task.status === status,
+      );
+    }
+    setData(prevData => {
+      prevData.forEach(dataOne => {
+        dataOne.data = dividedByStatusTask[dataOne.status];
+      });
+      return [...prevData];
     });
   }, []);
 

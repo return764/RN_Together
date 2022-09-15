@@ -20,4 +20,21 @@ const createTask = async task => {
   }
 };
 
-export {fetchTasks, createTask};
+const updateTaskStatus = async (id, status) => {
+  try {
+    const result = await request.put(`/tasks/${id}`, {
+      status,
+    });
+    return result.data;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+const TaskStatus = {
+  UNCOMPLETED: 0,
+  TO_EXAMINE: 1,
+  COMPLETED: 2,
+};
+
+export {fetchTasks, createTask, updateTaskStatus, TaskStatus};

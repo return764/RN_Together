@@ -1,12 +1,24 @@
 import {StyleSheet, Text} from 'react-native';
 import {timeUtil} from '../../../tools';
-import React from 'react';
+import React, {useContext} from 'react';
 import ActionCardView from '../../common/CardView/ActionCardView';
 import {useNavigation} from '@react-navigation/native';
+import {updateTaskStatus} from '../../../api/task';
+import TaskContext from '../../../store/TaskContext';
+import {TaskType} from '../../../store/config';
+import Toast from 'react-native-toast-message';
 
 const TaskItem = ({item, simultaneousHandlers}) => {
   const navigation = useNavigation();
-  const completeTask = () => {};
+  const {dispatch} = useContext(TaskContext);
+  const completeTask = async () => {
+    const task = await updateTaskStatus(item.id, 1);
+    if (task) {
+      dispatch({type: TaskType.UPDATE, payload: task});
+    } else {
+      Toast.show({type: 'error', text1: '更新任务失败'});
+    }
+  };
 
   const goToTaskDetail = () => {
     navigation.navigate('TaskDetail', {id: item.id});

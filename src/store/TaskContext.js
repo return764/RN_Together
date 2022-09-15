@@ -7,6 +7,8 @@ const reducer = (tasks, {type, payload}) => {
       return [...payload];
     case TaskType.ADD:
       return [...tasks, payload];
+    case TaskType.UPDATE:
+      return [...tasks.filter(task => task.id !== payload.id), payload];
     default:
       throw new Error();
   }

@@ -7,4 +7,5 @@ export const AuthType = {
 export const TaskType = {
   REFRESH: 'REFRESH',
   ADD: 'ADD',
+  UPDATE: 'UPDATE',
 };
