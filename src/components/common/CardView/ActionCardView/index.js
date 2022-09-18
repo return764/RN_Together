@@ -18,6 +18,8 @@ const EMPTY_FUNC = () => {};
 
 const ActionCardView = ({
   children,
+  leftActionText,
+  rightActionText,
   simultaneousHandlers = EMPTY_FUNC,
   onLeftAction = EMPTY_FUNC,
   onRightAction = EMPTY_FUNC,
@@ -110,13 +112,13 @@ const ActionCardView = ({
   return (
     <Animated.View>
       <Action
-        text="详情"
+        text={rightActionText}
         onAction={wrapperAction(onRightAction)}
         style={[styles.action1, actionAnimated]}
         width={cardActionStyle.width}
       />
       <Action
-        text="完成"
+        text={leftActionText}
         onAction={wrapperAction(onLeftAction)}
         style={[styles.action2, actionAnimated]}
         width={cardActionStyle.width}
