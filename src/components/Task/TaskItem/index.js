@@ -38,7 +38,6 @@ const TaskItem = ({item, simultaneousHandlers}) => {
   };
 
   const resolveActions = () => {
-    console.log(item.status);
     if (item.status === TaskStatus.UNCOMPLETED) {
       return {
         leftActionText: '完成',

@@ -11,6 +11,14 @@ const fetchTasks = async (sourceUserId = null, status = null) => {
   }
 };
 
+const fetchTask = async id => {
+  try {
+    return (await request.get(`/tasks/${id}`)).data;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 const createTask = async task => {
   try {
     const result = await request.post('/tasks', task);
@@ -37,4 +45,4 @@ const TaskStatus = {
   COMPLETED: 2,
 };
 
-export {fetchTasks, createTask, updateTaskStatus, TaskStatus};
+export {fetchTasks, fetchTask, createTask, updateTaskStatus, TaskStatus};
